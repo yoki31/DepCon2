@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: p1
+spec:
+  schedulerName: depcon2-scheduler
+  containers:
+    - name: p1
+      image: dkdla58/ubuntu:netperf
+      resources:
+        limits:
+          example.com/SLO: 300
+        requests:
+          cpu: "100m"
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+  restartPolicy: Never
