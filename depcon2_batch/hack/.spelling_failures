@@ -1,5 +1,0 @@
-BUILD
-OWNERS
-.gitignore
-third_party/
-vendor/
