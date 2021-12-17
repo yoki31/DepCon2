@@ -1,0 +1,5 @@
+actions: "allocate"
+tiers:
+- plugins:
+  - name: drf
+  - name: nodeorder

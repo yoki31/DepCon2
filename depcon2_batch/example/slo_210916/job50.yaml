@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: qj-50
+spec:
+  backoffLimit: 1
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      annotations:
+        scheduling.k8s.io/group-name: qj-50
+    spec:
+      containers:
+      - image: dkdla58/ubuntu:netperf
+        imagePullPolicy: IfNotPresent
+        name: qj-50
+        command: ["/bin/bash","-ec","while :; do echo '.'; sleep 5; done"]
+        resources:
+          limits:
+            example.com/SLO: "200"
+          requests:
+            cpu: "100m"
+      restartPolicy: Never
+      schedulerName: kube-batch
+---
+apiVersion: scheduling.incubator.k8s.io/v1alpha1
+kind: PodGroup
+metadata:
+  name: qj-50
+spec:
+  minMember: 1

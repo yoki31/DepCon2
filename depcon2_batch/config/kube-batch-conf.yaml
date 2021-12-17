@@ -1,0 +1,20 @@
+actions: "allocate"
+#tiers:
+        #- plugins:
+        #- name: drf
+        #- name: predicates
+        #- name: priority
+        #- 
+
+
+#actions: "reclaim, allocate, backfill, preempt"
+#tiers:
+#- plugins:
+#  - name: priority
+#  - name: gang
+#  - name: conformance
+#- plugins:
+#  - name: drf
+#  - name: predicates
+#  - name: proportion
+#  - name: nodeorder
