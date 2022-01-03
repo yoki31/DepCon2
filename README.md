@@ -197,8 +197,9 @@ if networkFraction > 1 {
         networkFraction = 1
 }
 ```
-		* cpu request는 전체 capacity를 넘을 수 있으므로 이러한 경우가 발생 가능함
-	* cpu, memory, volume, network에 대한 fraction의 편차를 계산 -> volume이 비율 계산에 포함이 되는 경우
+* cpu request는 전체 capacity를 넘을 수 있으므로 이러한 경우가 발생 가능함
+
+* cpu, memory, volume, network에 대한 fraction의 편차를 계산 -> volume이 비율 계산에 포함이 되는 경우
 ```
 mean := (cpuFraction + memoryFraction + volumeFraction + networkFraction) / float64(4)
 variance := float64((((cpuFraction - mean) * (cpuFraction - mean)) + ((memoryFraction - mean) * (memoryFraction - mean)) + ((volumeFraction - mean) * (volumeFraction - mean)) + ((networkFraction - mean) * (networkFraction - mean))) / float64(4))
@@ -208,7 +209,7 @@ variance := float64((((cpuFraction - mean) * (cpuFraction - mean)) + ((memoryFra
 mean := (cpuFraction + memoryFraction + networkFraction) / float64(3)
 variance := float64((((cpuFraction - mean) * (cpuFraction - mean)) + ((memoryFraction - mean) * (memoryFraction - mean)) + ((networkFraction - mean) * (networkFraction - mean))) / float64(3))
 ```
-	* 값을 반환할 때 scoring boundary인 1~10에 포함되도록 설정하여 반환
+* 값을 반환할 때 scoring boundary인 1~10에 포함되도록 설정하여 반환
 `return int64((1 - variance) * float64(framework.MaxNodeScore))`
 
 * resource_allocation.go에서 defaultRequestedRatioResources 추가
