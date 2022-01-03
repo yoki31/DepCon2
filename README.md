@@ -1,6 +1,6 @@
 # DepCon2 관련 내용 및 실험 방법 정리
 ## DepCon2 연구
-* DepCon2 연구는 기존 DepCon의 한계를 개선하려는 연구
+* DepCon2 연구는 기존 DepCon의 확장 연구
 * 기존 DepCon 연구는 Kubernetes 환경에서 DepCon scheduler를 이용하여 network 목표 성능을 달성하기에 적합한 환경을 선택(이 과정에서 network bandwidth에 대한 filtering을 제공하고 network 목표 성능 달성을 위해 정확히 얼만큼의 CPU가 필요한지 알 지 못하므로 할당 가능한 CPU가 많은 서버에 컨테이너를 생성하였다.)하고 DepCon agent를 이용하여 각 컨테이너의 CPU 할당량을 동적으로 조절하여 network SLO를 달성한다. 
 * DepCon2 연구는 network 목표 성능 달성을 위해 필요한 CPU를 트레이닝 데이터를 이용하여 예측하고, 예측한 CPU와 network를 기반으로 Kubernetes에서 스케줄링을 제공한다. 각 서버에서 CPU 할당량을 제어할 필요 없이 network 성능 달성을 위한 정해진 양의 CPU를 할당하여 네트워크 성능을 달성할 수 있도록 한다. 
 
