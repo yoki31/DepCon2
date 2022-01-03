@@ -40,11 +40,11 @@ spec:
           cpu: 100m #2500, 7500, 12500, 17500, ... 100000
   restartPolicy: Never
 ```
-	* p1.yaml 파일에서 image는 netperf, vnstat 등 데이터 수집에 필요한 툴이 설치되어 있는 이미지 파일
-	* resources: limits: cpu: -> cpu의 limit을 정할 수 있는 항목이고, cpu의 limit만 설정하면 자동으로 cpu request도 설정된다. Cpu의 limit 값으로 cpu quota 값이 결정된다. 
-	* cpu: 100m -> quota  값 : 100000 과 같음
-		* 2500 == 25m, 7500 == 75m, 12500 == 125m
-	* kubectl get pods를 이용하여 STATUS가 Running 상태인지 확인하고 Running 상태가 되면 아래의 스크립트를 사용하여 실험 진행 
+* p1.yaml 파일에서 image는 netperf, vnstat 등 데이터 수집에 필요한 툴이 설치되어 있는 이미지 파일
+* resources: limits: cpu: -> cpu의 limit을 정할 수 있는 항목이고, cpu의 limit만 설정하면 자동으로 cpu request도 설정된다. Cpu의 limit 값으로 cpu quota 값이 결정된다. 
+* cpu: 100m -> quota  값 : 100000 과 같음
+	* 2500 == 25m, 7500 == 75m, 12500 == 125m
+* kubectl get pods를 이용하여 STATUS가 Running 상태인지 확인하고 Running 상태가 되면 아래의 스크립트를 사용하여 실험 진행 
 
 * 실험 스크립트
 	* ./netperf_pod.sh p32[디렉토리 명]
@@ -72,15 +72,15 @@ do
         ((pkt=${pkt}*2))
 done
 ```
-		* 설정한 quota 크기별로 packet 사이즈를 32, 64, 128, 256, 512, 1024 늘리며 실험 진행, 각 패킷 사이즈별로 10번씩 실험 진행
-		* pod 내부에서 netperf, vnstat을 실행하여 실험 진행 
-	* 실험이 끝나고 kubectl delete -f p1.yaml을 입력하여 pod 삭제 후 p1.yaml에서 cpu limit을 그 다음 실험 quota로 변경하여 실험 
-		* 삭제 및 생성 반복하여 실험 진행
+* 설정한 quota 크기별로 packet 사이즈를 32, 64, 128, 256, 512, 1024 늘리며 실험 진행, 각 패킷 사이즈별로 10번씩 실험 진행
+	* pod 내부에서 netperf, vnstat을 실행하여 실험 진행 
+* 실험이 끝나고 kubectl delete -f p1.yaml을 입력하여 pod 삭제 후 p1.yaml에서 cpu limit을 그 다음 실험 quota로 변경하여 실험 
+	* 삭제 및 생성 반복하여 실험 진행
 
-	* ./main.sh
-		* quota 사이즈 별로 pod 생성 삭제가 귀찮고, netperf 실험을 quota 사이즈별로 자동으로 하고 싶으면 해당 스크립트 실행하면 됨
-			* quota 사이즈를 바꿀 때마다 pod를 삭제하고 생성하고를 반복해야 하므로 pod가 Running 상태가 되면, netperf 스크립트를 실행하도록 스크립트 작성
-				* 약간의 수정이 필요할 수 있음
+* ./main.sh
+	* quota 사이즈 별로 pod 생성 삭제가 귀찮고, netperf 실험을 quota 사이즈별로 자동으로 하고 싶으면 해당 스크립트 실행하면 됨
+		* quota 사이즈를 바꿀 때마다 pod를 삭제하고 생성하고를 반복해야 하므로 pod가 Running 상태가 되면, netperf 스크립트를 실행하도록 스크립트 작성
+			* 약간의 수정이 필요할 수 있음
 ```
 #!/bin/bash
 
@@ -176,9 +176,9 @@ do
         http://localhost:8001/api/v1/nodes/$node/status
 done
 ```
-	* ethtool로 Ethernet의 network bandwidth를 얻어옴
-	* 모든 노드들의 리스트를 얻어오고 kubectl proxy를 이용하여 kubernetes proxy를 실행 -> proxy 실행으로 API server에 연결 가능
-	* ethtool에서 network bandwidth가 Mbps 단위로 출력이 되기 때문에 전체 capacity는 Mbps 만큼 곱하여 API server에 등록함.
+* ethtool로 Ethernet의 network bandwidth를 얻어옴
+* 모든 노드들의 리스트를 얻어오고 kubectl proxy를 이용하여 kubernetes proxy를 실행 -> proxy 실행으로 API server에 연결 가능
+* ethtool에서 network bandwidth가 Mbps 단위로 출력이 되기 때문에 전체 capacity는 Mbps 만큼 곱하여 API server에 등록함.
 
 - - - -
 ### DepCon2 스케줄러 scoring 구현 방법
