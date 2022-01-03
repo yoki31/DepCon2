@@ -204,7 +204,8 @@ if networkFraction > 1 {
 mean := (cpuFraction + memoryFraction + volumeFraction + networkFraction) / float64(4)
 variance := float64((((cpuFraction - mean) * (cpuFraction - mean)) + ((memoryFraction - mean) * (memoryFraction - mean)) + ((volumeFraction - mean) * (volumeFraction - mean)) + ((networkFraction - mean) * (networkFraction - mean))) / float64(4))
 ```
-	* cpu, memory, volume, network에 대한 fraction의 편차를 계산 -> volume이 비율 계산에 포함이 되지 않는 경우
+
+* cpu, memory, volume, network에 대한 fraction의 편차를 계산 -> volume이 비율 계산에 포함이 되지 않는 경우
 ```
 mean := (cpuFraction + memoryFraction + networkFraction) / float64(3)
 variance := float64((((cpuFraction - mean) * (cpuFraction - mean)) + ((memoryFraction - mean) * (memoryFraction - mean)) + ((networkFraction - mean) * (networkFraction - mean))) / float64(3))
